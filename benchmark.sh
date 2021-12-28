@@ -1,5 +1,5 @@
 GRAAL_ARGS="-XX:+UnlockExperimentalVMOptions   -XX:+EnableJVMCI   -XX:+UseJVMCICompiler -Djvmci.Compiler=graal"
-LOAD_EXTERNAL_GRAAL="--module-path=./org.graalvm.graal_sdk.jar"
+LOAD_EXTERNAL_GRAAL="--module-path=./lib/graal-sdk-21.1.0.jar --upgrade-module-path=./lib/jdk.internal.vm.compiler.jar"
 VMOPTS="";
 
 if [ "$1" == "--graal" ]; then
@@ -7,7 +7,7 @@ if [ "$1" == "--graal" ]; then
     VMOPTS=$GRAAL_ARGS;
 elif [ "$1" == "--graal-external" ]; then
     echo "Using external Graal JIT compiler."
-    VMOPTS="$LOAD_EXTERNAL_GRAAL $GRAAL_ARGS";
+    VMOPTS="-verbose $LOAD_EXTERNAL_GRAAL $GRAAL_ARGS";
 fi
 echo
 echo "running count benchmark"
